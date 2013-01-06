@@ -1,0 +1,223 @@
+
+#include "stdafx.h"
+#include <iostream>
+#include <conio.h>
+#include <ctime>
+#include <Windows.h>
+
+using namespace std;
+
+void wprowadz(int n, int m, int tab[][10])  			// generator losowej tablicy
+{
+	for(int i = 0; i < n; i++)
+	{
+		for(int j = 0; j < m; j++)
+		{
+			rand();
+			tab[i][j] = int(rand()%15 + -5);
+		}
+	}
+
+} 				
+void pisz_tab(int n, int m, int tab[][10])				// funkcja wypisująca daną tablicę
+{ 
+	cout << endl;
+	for(int i = 0; i < n; i++){
+		for(int j = 0; j < m; j++){
+			cout << tab[i][j] << "\t";
+		}
+		cout << endl;
+	}
+}
+void sortuj (int n, int m, int tab[][10])				// funkcja sortująca tablicę wyglada jakby nie trybilo...
+{
+  int i, j, tmp;
+    for (i = 0; i < n-1; i++)
+    { 
+		j = i + 1;
+	    tmp = tab[j];
+	    while ((j > 0) && (tab[j-1] > tmp[]))
+	    { 
+			tab[j] = tab[j-1];
+	        j--;
+	    }
+	    tab[j] = tmp;
+    }
+}
+int main()
+{
+	srand((unsigned) time(NULL));		// deklaracja zmiennych DONE
+	short int n;
+	short int m;
+	short int wyb1;
+	short int wyb2;
+	short int wyb3;
+	short int pow;
+	int tab[10][10];
+	do									// loop do...while powtarzająca
+	{
+		do								// loop do...while sprawdzajaca poprawnosc
+		{
+		system("cls");
+
+	cout << "Witaj!" << endl << "Program ten wygeneruje macierz o maksymalnym " << endl << // wyswietlenie pierwszego MENU DONE
+		"rozmiarze 10x10 o losowych elementach z zakresu [-5;10] i go posortuje..." << endl <<
+		"(to do: sortowanie)" << endl << endl << "\tMENU"<< endl <<
+		"1. Reczne wpisanie rozmiaru tablicy" << endl <<
+		"2. Losowy rozmiar tablicy"<< endl <<
+		"Twoj wybor: ";
+	cin >> wyb1;
+	cin.clear();
+	cin.sync();
+	switch(wyb1)						// wybranie opcji przez uzytkownika z pierwszego MENU
+	{
+	case 1:								// case ktory pobiera rozmiar tablicy od uzytkownika
+		{
+			do							// petla do...while sprawdzajaca poprawnosc wprowadzonych danych
+			{
+			cout << endl << "Podaj liczbe wierszy: ";
+			cin >> n;
+			cin.clear();
+			cin.sync();
+			if (n>10 || n<1)
+				{
+				cout << "Podaj liczbe z zakresu 1-10: ";
+				}
+			}
+			while(n>10 || n<1);
+		cout << "Podaj liczbe kolumn: ";
+		do								// petla do...while sprawdzajaca poprawnosc wprowadzonych danych
+			{
+			cin >> m;
+			cin.clear();
+			cin.sync();
+			if (m>10 || m<1)
+				{
+				cout << "Podaj liczbe z zakresu 1-10: ";
+				}
+			}
+		while(m>10 || m<1);
+		pow=0;
+		break;
+		}
+	case 2:								// case ktory losuje rozmiar macierzy
+		{
+			n=int(rand()%10 + 1);
+			m=int(rand()%10 + 1);
+			pow=0;
+			break;
+		}
+	default :							// default-jezeli zostaly wprowadzone bledne dane
+		{
+			cout << endl << "Bledne dane";
+			cin.clear();
+			cin.sync();
+			pow=1;
+			_getch();
+		}
+	}
+	}
+	while(pow==1);
+	cout << endl << "Ilosc wierszy: " << n;			// wypisanie rozmiarów wygenerowanej tablicy
+	cout << endl << "Ilosc kolumn: " << m << endl << endl;
+	cout << "Wcisnij dowolny klawisz by przejsc do kolejnego menu.";
+	
+	//-----------------------------------------------------------------------------
+	
+	do												// petla do...while sprawdzajaca poprawnosc
+	{
+	_getch();
+	system("cls");
+	wprowadz(n,m,tab);								// uzycie funkcji wprowadzajacej losowe dane do tablicy
+	cout << "\t MENU" << endl <<					// wyswietlenie drugiego MENU
+		"1. Wyswietlenie tablicy pierwotnej." << endl <<
+		"2. Wyswietlenie tablicy posortowanej." << endl <<
+		"3. Wyswietlenie tablicy pierwotnej i posortowanej." << endl <<
+		"Twoj wybor: ";
+	
+	cin >> wyb2;
+	cin.clear();
+	cin.sync();
+	switch(wyb2)									// wybranie opcji przez uzytkownika z drugiego MENU 
+	{
+		case 1:										// case wypisujacy pierwotna tablice
+		{
+			pisz_tab(n,m,tab);
+			pow=0;
+			break;
+		}
+		case 2:										// case sortujacy i wypisujacy posortowana tablice
+		{
+			sortuj(n,m,tab);
+			pisz_tab(n,m,tab);
+			pow=0;
+			break;
+		}
+		case 3:										// case wypisujacy macierz pierwotna, sortujacy ja
+		{											// i wypisujacy posortowana tablice
+			pisz_tab(n,m,tab);
+			cout << endl << endl << "===================================" <<
+				 endl << endl;
+			sortuj(n,m,tab);
+			pisz_tab(n,m,tab);
+			pow=0;
+			break;
+		}
+		default :									// default
+		{
+			cout << endl << "Bledne dane";
+			cin.clear();
+			cin.sync();
+			pow=1;
+			break;
+		}
+
+	}
+	}
+	while(pow==1);
+
+	cout << endl << "Wcisnij dowolny klawisz aby przejsc do kolejnego menu";
+
+	//---------------------------------------------------------------------------------
+	
+	do
+	{												// petla do...while sprawdzajaca poprawnosc wprowadzonych danych DONE
+	_getch();
+	system("cls");
+	cout << "\tMENU" << endl <<						// wyswietlenie trzeciego MENU
+		 "1. Powrot do poczatkowego menu." << endl <<
+		 "2. Zakonczenie dzialania programu." << endl <<
+		 "Twoj wybor: ";
+	
+	cin >> wyb3;
+	cin.clear();
+	cin.sync();
+	switch(wyb3)									// wybranie opcji przez uzytkownika z drugiego MENU
+	{
+	case 1:											// case powracajacy na poczatek programu
+		{
+			pow=1;
+			break;
+		}
+	case 2:											// case konczacy program
+		{
+			cout << endl << endl << "Dziekuje za skorzystanie z programu!";
+			pow=2;
+			break;
+		}
+	default:										// default-jezeli zostaly wprowadzone bledne dane
+		{
+			cout << endl << "Bledne dane";
+			cin.clear();
+			cin.sync();
+			pow=3;
+			break;
+		}
+	}
+	}
+	while(pow==3);
+	}
+	while(pow==1);
+	_getch();
+	return 0;
+}
