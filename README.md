@@ -1,0 +1,4 @@
+sortowanie
+==========
+
+Sortowanie przez wstawianie
