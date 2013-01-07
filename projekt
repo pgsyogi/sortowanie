@@ -1,15 +1,3 @@
-// Zadanie 69 - Grzegorz Gruszecki Semestr 1 Grupa 0/3 (2012)	
-// Napisz program który:
-// 1. Wygeneruje maciesz prostokątną A nxm o losowych elementach typu int z zakresu
-//    [-5, 10], gdzie n i m są aktualnymi rozmiarami macierzy. Maksymalna liczba
-//    wierszy macierzy n_Max wynosi 10, maksymalna liczba kolumn m_Max wynosi 10.
-// 2. Wyświetli wygenerowaną macierz.
-// 3. Uporządkuje każdą kolumnę macierzy nierosnąco metodą wstawiania.
-// 4. Wyświetli zmodyfikowaną macierz.
-// 5. Program powinien zawierać menu z możliwością wyboru poszczególnych opcji.
-// 6. Program powinien umożliwić wielokrotne wykonanie programu dla różnych
-//    danych bez powrotu do edytora.
-
 #include "stdafx.h"
 #include <iostream>
 #include <conio.h>
