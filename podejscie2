@@ -1,4 +1,5 @@
 #include "stdafx.h"
+#include "stdlib.h"
 #include <iostream>
 #include <conio.h>
 #include <ctime>
@@ -6,7 +7,7 @@
 
 using namespace std;
 
-void wprowadz(int n, int m, int tab[][10])				// generator losowej tablicy
+void wprowadz(int n, int m, int tab[][10])  			// generator losowej tablicy
 {
 	for(int i = 0; i < n; i++)
 	{
@@ -30,26 +31,47 @@ void pisz_tab(int n, int m, int tab[][10])				// funkcja wypisująca daną tabli
 		cout << endl;
 	}
 }
-void sortuj (int n, int m, int tab[][10])				// funkcja sortująca tablicę wyglada jakby nie trybilo...
+void sortuj(int tab[][10], int i, int j)
 {
-  int i, j, tmp;
-    for (i = 0; i < n-1; i++)
-    { 
-		j = i + 1;
-	    tmp = tab[j];
-	    while ((j > 0) && (tab[j-1] > tmp[]))
-	    { 
-			tab[j] = tab[j-1];
-	        j--;
-	    }
-	    tab[j] = tmp;
-    }
+ 
+        /*for(i; i>=0; i--)
+        {
+                int temp = tab[i];
+                //int j = i++;
+                while((temp > tab[j]) && (j > 1))
+                {
+                        tab[j-1] = tab[j];
+                        j--;
+                }
+                tab[j-1] = temp;
+        }*/
+        int y;
+        bool sorted = false;
+        while(sorted==false)
+        {
+            sorted=true;
+            for(i;i>=0;i--)
+            {
+                for(j; j>=0; j--)
+                {
+                    if(tab[j+1][i] < tab[j][i]) // swap values
+                    {
+                        y = tab[j][i];
+                        tab[j][i] = tab[j+1][i];
+                        tab[j+1][i] = y;
+                        sorted=false;
+                    }
+                }
+            }
+            
+        }
+ 
 }
 int main()
 {
 	srand((unsigned) time(NULL));		// deklaracja zmiennych DONE
-	short int n;
-	short int m;
+    int n;
+	int m;
 	short int wyb1;
 	short int wyb2;
 	short int wyb3;
@@ -149,7 +171,7 @@ int main()
 		}
 		case 2:										// case sortujacy i wypisujacy posortowana tablice
 		{
-			sortuj(n,m,tab);
+			sortuj(tab, n,m);
 			pisz_tab(n,m,tab);
 			pow=0;
 			break;
@@ -159,7 +181,7 @@ int main()
 			pisz_tab(n,m,tab);
 			cout << endl << endl << "===================================" <<
 				 endl << endl;
-			sortuj(n,m,tab);
+			sortuj(tab,n,m);
 			pisz_tab(n,m,tab);
 			pow=0;
 			break;
